@@ -1,0 +1,29 @@
+(INSERT INTO purchases (userid, symbol, amount) VALUES('? ? ? '), userid, symbol, shares)
+
+
+
+
+SELECT users.username, symbol, amount, dt  FROM purchases WHERE userid = ? inner join users on users.id = purchases.userid
+
+UPDATE purchases SET amount = amount + ? WHERE userid = ?;
+
+
+select distinct stocks.symbol, (stocks.price * purchases.amount) as TotalValue from stocks
+left join purchases on purchases.userid = stocks.userid
+where stocks.userid = 3;
+
+
+select purchases.symbol, purchases.amount, stocks.price, (stocks.price * purchases.amount) as TotalValue from purchases join stocks on stocks.userid = purchases.userid join users on users.id = purchases.userid where purchases.userid = 3 group by purchases.symbol;
+
+select (stocks.price * purchases.amount + (select cash from users where id = ?)) as Value from purchases join stocks on stocks.userid = purchases.userid right join users on users.id = purchases.userid where purchases.userid = ? group by purchases.symbol;
+
+select cash from users where id = 3
+
+
+
+select (stocks.price * purchases.amount) as Value, users.cash
+from purchases
+join stocks on stocks.userid = purchases.userid
+join users on users.id = purchases.userid
+where purchases.userid = 3
+group by purchases.symbol;

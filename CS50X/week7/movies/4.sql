@@ -1,0 +1,1 @@
+select count(*) from ratings where rating like '10.0';

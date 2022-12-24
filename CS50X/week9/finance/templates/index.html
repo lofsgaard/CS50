@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    index
+{% endblock %}
+
+{% block main %}
+    <h1>Portfolio</h1>
+    <table class=" table table-dark">
+        <thead>
+            <tr class="table-dark">
+                <th class="table-dark">Symbol</th>
+                <th class="table-dark">Amount</th>
+                <th class="table-dark">Price</th>
+                <th class="table-dark">TotalValue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for purchase in purchases %}
+                <tr class="table-dark">
+                    <td class="table-dark">{{ purchase.symbol }}</td>
+                    <td class="table-dark">{{ purchase.amount }}</td>
+                    <td class="table-dark">{{ "$%.2f"|format(purchase.price) }}</td>
+                    <td class="table-dark">{{ "$%.2f"|format(purchase.TotalValue) }}</td>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1>Cash</h1>
+    <table class=" table table-dark">
+        <thead>
+            <tr class="table-dark">
+                <th class="table-dark">Cash</th>
+                <th class="table-dark">Grand Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-dark"></tr>
+            {% for value in balance %}
+                <td class="table-dark">{{ "$%.2f"|format(value.cash) }}</td>
+            {% endfor %}
+                <td class="table-dark">{{ "$%.2f"|format(value_cash) }}</td>
+
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+
