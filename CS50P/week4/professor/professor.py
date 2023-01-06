@@ -1,55 +1,60 @@
 import random
+import sys
 
 
 def main():
-    x, y = generate_integer(get_level())
-    count = 0
+    level = get_level()
+    fails = 1
     score = 0
-    while True:
-        for i in range(len(x)):
-            try:
-                if count != 3 and score < 10:
-                    z = x[i] + y[i]
-                    answer = input(f'{x[i]} + {y[i]} = ')
-                    if int(answer) == int(z):
-                        score += 1
-                    elif int(answer) != int(z) and count == 3:
-                        print(z)
-                    else:
-                        raise ValueError
-                elif score == 10:
-                    print(f'Score {score}')
-                    return False
-            except ValueError:
-                print('EEE')
-                count += 1
+    for i in range(10):
+        x = generate_integer(level)
+        for j in range(1):
+            y = generate_integer(level)
+            answer = x + y
+            problem = input(f"{x} + {y} = ")
+
+            if answer == int(problem):
+                score += 1
+
+            while answer != int(problem):
+                fails += 1
+                print("EEE")
+                problem = input(f"{x} + {y} = ")
+                if fails >= 3:
+                    print(answer)
+                    sys.exit("Score: " + str(score))
+    print("Score: " + str(score))
+
+
+
+
 
 def get_level():
     while True:
         try:
-            level = int(input("Level: "))
-            if level > 0 and level <=3:
+            level = int(input('Level: '))
+            if level == 1:
+                return level
+            elif level == 2:
+                return level
+            elif level == 3:
                 return level
             else:
-                continue
-        except:
-            ...
+                raise ValueError
+        except ValueError:
+            continue
 
 
-def generate_integer(n):
-
-    if n == 1:
-        x = random.sample(range(0, 10), 10)
-        y = random.sample(range(0, 10), 10)
-    elif n == 2:
-        x = random.sample(range(10, 99), 10)
-        y = random.sample(range(10, 99), 10)
-    elif n == 3:
-        x = random.sample(range(100, 999), 10)
-        y = random.sample(range(100, 999), 10)
-    print(x, y)
-    return x, y
-
+def generate_integer(level):
+    if level == 1:
+        x = random.randint(0, 10)
+        return x
+    elif level == 2:
+        x = random.randint(10, 99)
+        return x
+    elif level == 3:
+        x = random.randint(100, 999)
+        return x
 
 
 if __name__ == "__main__":
